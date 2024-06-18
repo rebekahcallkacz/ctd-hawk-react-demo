@@ -1,5 +1,9 @@
 # React + Vite
 
+## Lesson 1.1
+
+Step 1 is to create a branch for lesson 1.1 and open a PR for it.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
