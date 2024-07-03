@@ -27,8 +27,9 @@ function Button(props) {
         {/* Pass the handler function to the button so that the count is updated onClick */}
         <button onClick={onHandleButtonClick}>
           {/* Pass the title inherited from the parent - will not display if this is not passed from parent*/}
-          {props.title} count is {count}
+          {props.title}
         </button>
+        <h4>{`Count is: ${count}`}</h4>
         {/* Going to conditionally render this statement - only show if count > 2 - will update as the count does*/}
         {count > 2 && props.showCountNotification && <h3>The count is greater than 2!</h3>}
         </>
