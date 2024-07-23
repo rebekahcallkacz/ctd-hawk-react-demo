@@ -14,8 +14,6 @@ const getName = ((name) => {
 function App() {
   // Going to start this value at 0 (initial state)
   const [books, setBooks] = useState(0)
-  // Going to start this value at 1 (initial state)
-  const [audiobooks, setAudiobooks] = useState(1)
   // This state is in order to controll the input value
   const [inputValue, setInputValue] = useState();
   // Here we are destructuring the array returned by getName
@@ -31,10 +29,6 @@ function App() {
     setBooks(books - 1)
   };
 
-  // This is a handler function to add one to audiobooks
-  const handleClickAddAudiobooks = () => {
-    setAudiobooks(audiobooks + 1)
-  };
 
   return (
     <>
@@ -46,10 +40,6 @@ function App() {
         <Button title={"Add 1 book"} handleClick={handleClickAddBooks}/>
         <Button title={"Subtract 1 book"} handleClick={handleClickSubtractBooks}/>
       </div>
-      <h3>Total of Count 2: </h3>
-      <h3>{audiobooks}</h3>
-      {/* This button updates audiobooks */}
-      <Button title={"Add 1 audiobook"} handleClick={handleClickAddAudiobooks}/>
       <p>Sample Input</p>
       <p>Controlled Input</p>
       {/* This is a controlled input because the value is defined by inputValue (a variable) */}
