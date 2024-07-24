@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
 import Button from './Button'
 
@@ -12,12 +10,18 @@ const getName = ((name) => {
 })
 
 function App() {
-  // Going to start this value at 0 (initial state)
-  const [books, setBooks] = useState(0)
-  // This state is in order to controll the input value
+  // Going to start this value at whatever is stored in localStorage at the key 'books' 
+  // or 0 if there is nothing in localStorage 
+  const [books, setBooks] = useState(parseInt(localStorage.getItem("books") ?? 0))
+  // This state is in order to control the input value
   const [inputValue, setInputValue] = useState();
   // Here we are destructuring the array returned by getName
   const [firstName, lastName] = getName("Rebekah Callari");
+
+  // This will run on initial render and anytime books changes
+  useEffect(() => {
+    localStorage.setItem("books", books)
+  }, [books])
 
   // This is a handler function to add one to books
   const handleClickAddBooks = () => {
@@ -33,7 +37,7 @@ function App() {
   return (
     <>
       <h3>{`Owner: ${lastName ?? "-"}, ${firstName ?? "-"}`}</h3>
-      <h3>Total of Count 1: </h3>
+      <h3>Total Number of Books: </h3>
       <h3>{books}</h3>
       {/* These two buttons both update books */}
       <div className="card">
