@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
 import Button from './Button'
 
@@ -12,14 +10,18 @@ const getName = ((name) => {
 })
 
 function App() {
-  // Going to start this value at 0 (initial state)
-  const [books, setBooks] = useState(0)
-  // Going to start this value at 1 (initial state)
-  const [audiobooks, setAudiobooks] = useState(1)
-  // This state is in order to controll the input value
+  // Going to start this value at whatever is stored in localStorage at the key 'books' 
+  // or 0 if there is nothing in localStorage 
+  const [books, setBooks] = useState(parseInt(localStorage.getItem("books") ?? 0))
+  // This state is in order to control the input value
   const [inputValue, setInputValue] = useState();
   // Here we are destructuring the array returned by getName
   const [firstName, lastName] = getName("Rebekah Callari");
+
+  // This will run on initial render and anytime books changes
+  useEffect(() => {
+    localStorage.setItem("books", books)
+  }, [books])
 
   // This is a handler function to add one to books
   const handleClickAddBooks = () => {
@@ -31,25 +33,17 @@ function App() {
     setBooks(books - 1)
   };
 
-  // This is a handler function to add one to audiobooks
-  const handleClickAddAudiobooks = () => {
-    setAudiobooks(audiobooks + 1)
-  };
 
   return (
     <>
       <h3>{`Owner: ${lastName ?? "-"}, ${firstName ?? "-"}`}</h3>
-      <h3>Total of Count 1: </h3>
+      <h3>Total Number of Books: </h3>
       <h3>{books}</h3>
       {/* These two buttons both update books */}
       <div className="card">
         <Button title={"Add 1 book"} handleClick={handleClickAddBooks}/>
         <Button title={"Subtract 1 book"} handleClick={handleClickSubtractBooks}/>
       </div>
-      <h3>Total of Count 2: </h3>
-      <h3>{audiobooks}</h3>
-      {/* This button updates audiobooks */}
-      <Button title={"Add 1 audiobook"} handleClick={handleClickAddAudiobooks}/>
       <p>Sample Input</p>
       <p>Controlled Input</p>
       {/* This is a controlled input because the value is defined by inputValue (a variable) */}
