@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import Button from './Button'
+import AddIcon from './icons/Add'
 
 // This function takes a string and splits it by a space
 // This is an example of a function that returns an array
@@ -41,8 +42,16 @@ function App() {
       <h3>{books}</h3>
       {/* These two buttons both update books */}
       <div className="card">
-        <Button title={"Add 1 book"} handleClick={handleClickAddBooks}/>
-        <Button title={"Subtract 1 book"} handleClick={handleClickSubtractBooks}/>
+        <Button handleClick={handleClickAddBooks}>
+          <div style={{ display: "flex", alignItems: "center"}}>
+              <div>Add 1 book</div>
+              <AddIcon height="25px" fill="#FF00FF"/>
+            </div>
+        </Button>
+        <Button handleClick={handleClickSubtractBooks}>
+          {/* Since we changed this prop to children - we can now easily pass a string, an html component or a React component */}
+          {"Subtract 1 book"}
+        </Button>
       </div>
       <p>Sample Input</p>
       <p>Controlled Input</p>
