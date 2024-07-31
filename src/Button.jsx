@@ -1,10 +1,10 @@
 
-function Button(props) {
+function Button({handleClick, children}) {
 
     return (
         <>
-        <button onClick={props.handleClick}>
-          {props.title}
+        <button onClick={handleClick}>
+          {children}
         </button>
         </>
     )
